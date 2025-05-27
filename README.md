@@ -1,20 +1,32 @@
-# GitfFish-buyExample
+# GlassFish-AppShop
 
 ## Overview
 
-**GitfFish-buyExample** is a Java web application simulating an online product purchase system.  
-It features a simple interface for selecting products, entering purchase quantities, and viewing a purchase summary with total price calculation.  
-This project is ideal for students learning Java EE (Jakarta EE), JSP, and servlet-based development.
+**GlassFish-AppShop** is a complete Java web application simulating a secure online product purchase system.  
+It features user authentication, session management, comprehensive error handling, and a shopping cart system with persistent purchase history.  
+This project demonstrates advanced Java EE (Jakarta EE) concepts including servlets, JSP, session management, and custom error pages.
 
 ---
 
 ## Features
 
-- ✅ Table with available products and stock quantity  
-- 🛒 Purchase form with quantity input per product  
-- 📊 Summary table of purchases made, including subtotals and overall total  
-- ⚠️ Error handling for negative quantities (with user-friendly messages)  
-- 💾 Session-based cart management (persistent per user session)
+- 🔐 **User Authentication System** with login/logout functionality
+- ✅ **Product Catalog** with dynamic table showing available products and stock quantity  
+- 🛒 **Shopping Cart** with quantity validation and session-based persistence
+- 📊 **Purchase Summary** with detailed breakdown including subtotals and overall total  
+- ⚠️ **Advanced Error Handling** with custom error pages for different scenarios
+- 🔒 **Session Security** - protected routes requiring authentication
+- 💾 **Persistent Shopping Cart** - maintains cart across user session
+- 🎨 **Professional UI** with styled error pages and user-friendly interface
+
+---
+
+## Authentication
+
+- **Username:** `admin`
+- **Password:** `1234`
+
+Users must log in to make purchases. Unauthorized access attempts are redirected to custom error pages.
 
 ---
 
@@ -23,7 +35,7 @@ This project is ideal for students learning Java EE (Jakarta EE), JSP, and servl
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/imlosing07/GitfFish-buyExample.git
+git clone https://github.com/imlosing07/GlassFish-AppShop.git
 ```
 
 ### 2. Requirements
@@ -38,14 +50,15 @@ git clone https://github.com/imlosing07/GitfFish-buyExample.git
 1. Import the project as a Maven project in IntelliJ IDEA.
 2. Configure the GlassFish server (point it to the `domain` folder of GlassFish 6.2.5).
 3. Deploy the WAR file or run directly from the IDE.
+4. Access the application at `http://localhost:8080/ComprasProductosGlassFish-1.0-SNAPSHOT/`
 
 ---
 
 ## Screenshots
 
-| **Product Table View** | **Purchase Summary** |
-|------------------------|---------------------|
-| *(Add your screenshots here!)* | *(Showcase your compiled project!)* |
+| **Product Table View** | **Purchase Summary** | **Error Handling** |
+|------------------------|---------------------|-------------------|
+| ![Product Table](screenshots/screenshotTableProducts.png) | ![Purchase Summary](screenshots/screenshotPurchase.png) | ![Error Page](screenshots/screenshotError.png) |
 
 ---
 
@@ -55,50 +68,96 @@ git clone https://github.com/imlosing07/GitfFish-buyExample.git
 ComprasProductosGlassFish/
 ├── src/
 │   └── main/
-│       ├── java/
-│       │   └── com/codigo/
-│       │       ├── Producto.java
-│       │       ├── ItemCompra.java
-│       │       └── CompraServlet.java
+│       ├── java/com/codigo/comprasproductosglassfish/
+│       │   ├── BaseDatosSimulada.java      # Mock database with products
+│       │   ├── CompraServlet.java          # Purchase processing servlet
+│       │   ├── LoginServlet.java           # Authentication handler
+│       │   ├── Producto.java               # Product model class
+│       │   └── ItemCompra.java             # Shopping cart item model
 │       └── webapp/
-│           ├── index.jsp
-│           ├── resultado.jsp
+│           ├── index.jsp                   # Main product catalog page
+│           ├── login.jsp                   # User authentication page
+│           ├── resultado.jsp               # Purchase summary page
+│           ├── error.jsp                   # Custom error handling page
 │           └── WEB-INF/
-│               └── web.xml
-├── pom.xml
+│               └── web.xml                 # Servlet configuration & error mapping
+├── screenshots/                            # Application screenshots
+├── pom.xml                                 # Maven configuration
 └── README.md
 ```
 
 ---
 
-## Technologies Used
+## Key Components
 
-- Java 11
-- Jakarta EE 9+
-- JSP (JavaServer Pages)
-- Servlets
-- Maven
-- GlassFish 6.2.5
-- HTML/CSS
+### Authentication System
+- **LoginServlet**: Handles user authentication with session management
+- **Session Protection**: Validates user sessions before allowing purchases
+- **Redirect Logic**: Maintains user's intended destination after login
+
+### Error Handling
+- **Custom Error Page**: Professional error display with contextual information
+- **Multiple Error Types**: Handles validation errors, server errors, and authentication failures
+- **User-Friendly Messages**: Clear guidance for users on next steps
+
+### Shopping System
+- **Product Catalog**: Dynamic display of available products with real-time stock
+- **Purchase Validation**: Comprehensive checks for stock availability and input validation
+- **Cart Management**: Session-based shopping cart with persistent history
 
 ---
 
-## Example Product Dataset
+## Technologies Used
 
-The following mock product list is included in memory:
+- **Java 11+**
+- **Jakarta EE 9+**
+- **JSP (JavaServer Pages)**
+- **Servlets**
+- **Maven**
+- **Eclipse GlassFish 6.2.5**
+- **HTML5/CSS3**
+- **Session Management**
 
-| Product Name | Price (USD) | Stock |
+---
+
+## Product Catalog
+
+The application includes a comprehensive mock product database:
+
+| Product Name | Price (S/) | Stock |
 |--------------|-------------|-------|
-| Laptop       | 1200.00     | 5     |
-| Smartphone   | 800.00      | 10    |
-| Headphones   | 150.00      | 15    |
-| Mouse        | 30.00       | 25    |
-| Keyboard     | 50.00       | 20    |
-| Monitor      | 300.00      | 8     |
-| USB Drive    | 20.00       | 40    |
-| Webcam       | 70.00       | 10    |
+| Laptop       | 2500.00     | 5     |
+| Mouse        | 80.00       | 20    |
+| Teclado      | 150.00      | 10    |
+| Monitor      | 900.00      | 3     |
+| Parlantes    | 300.00      | 8     |
+| Impresora    | 600.00      | 4     |
+| USB 32GB     | 45.00       | 25    |
+| Disco Duro   | 380.00      | 6     |
+| Router       | 220.00      | 7     |
+| Cámara Web   | 130.00      | 9     |
 
-> **Note:** Users can only purchase up to the available quantity.
+> **Note:** Stock quantities are updated in real-time as purchases are made.
+
+---
+
+## Security Features
+
+- **Session-Based Authentication**: Secure login system with session validation
+- **Protected Routes**: Purchase functionality requires authentication
+- **Input Validation**: Comprehensive validation for all user inputs
+- **Error Containment**: Graceful error handling prevents system crashes
+
+---
+
+## Error Handling
+
+The application includes comprehensive error handling:
+
+- **Validation Errors**: Invalid quantities, out-of-stock items
+- **Authentication Errors**: Invalid credentials, session timeouts
+- **Server Errors**: 404, 500, and other HTTP error codes
+- **Custom Error Pages**: Professional error display with recovery options
 
 ---
 
@@ -117,4 +176,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
 
-For any questions or suggestions, feel free to [open an issue](https://github.com/imlosing07/GitfFish-buyExample/issues) or contact the maintainer.
+For any questions or suggestions, feel free to [open an issue](https://github.com/imlosing07/GlassFish-AppShop/issues) or contact the maintainer.
